@@ -1,0 +1,50 @@
+<colony name='testTaskFarm' food='1003' structure='100' energy='1000' materials='527'>
+  <members>
+    <member id='1' name='Gultar Ze Terrible' health='100' building_id='4' />
+    <member id='2' name='Cinderella' health='100' building_id='8' />
+    <member id='3' name='Yogolo' health='100' building_id='3' />
+    <member id='4' name='Pikimousse' health='100' building_id='6' />
+    <member id='5' name='Simbad' health='100' building_id='5' />
+    <member id='6' name='Calan' health='100' building_id='1' />
+    <member id='7' name='Pfiouu' health='100' building_id='7' />
+    <member id='8' name='Aurag' health='100' building_id='4' />
+    <member id='9' name='Stania' health='100' building_id='6' />
+  </members>
+  <buildings>
+    <building id='1' type='STORE' health='100' />
+    <building id='2' type='STORE' health='100' />
+    <building id='3' type='FARM' health='100' />
+    <building id='4' type='FARM' health='100' />
+    <building id='5' type='FARM' health='100' />
+    <building id='6' type='FARM' health='100' />
+    <building id='7' type='MINE' health='100' />
+    <building id='8' type='MINE' health='100' />
+    <building id='9' type='MINE' health='100' />
+    <building id='10' type='BEDROOM' health='100' />
+  </buildings>
+  <tasks>
+    <task type='Farm' building_id=''>
+      <contributors>
+        <member_id>1</member_id>
+      </contributors>
+    </task>
+    <task type='Mine' building_id=''>
+      <contributors>
+        <member_id>1</member_id>
+        <member_id>2</member_id>
+        <member_id>3</member_id>
+        <member_id>4</member_id>
+        <member_id>5</member_id>
+        <member_id>6</member_id>
+        <member_id>7</member_id>
+        <member_id>8</member_id>
+        <member_id>9</member_id>
+      </contributors>
+    </task>
+    <task type='Repair building' building_id='1'>
+      <contributors>
+        <member_id>2</member_id>
+      </contributors>
+    </task>
+  </tasks>
+</colony>

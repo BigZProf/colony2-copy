@@ -1,0 +1,26 @@
+<colony name='testGameStartDay0' food='1000' structure='100' energy='1000' materials='500'>
+  <members>
+    <member id='1' name='Gultar Ze Terrible' health='100' building_id='' />
+    <member id='2' name='Cinderella' health='100' building_id='' />
+    <member id='3' name='Yogolo' health='100' building_id='' />
+    <member id='4' name='Pikimousse' health='100' building_id='' />
+    <member id='5' name='Simbad' health='100' building_id='' />
+    <member id='6' name='Calan' health='100' building_id='' />
+    <member id='7' name='Pfiouu' health='100' building_id='' />
+    <member id='8' name='Aurag' health='100' building_id='' />
+    <member id='9' name='Stania' health='100' building_id='' />
+  </members>
+  <buildings>
+    <building id='1' type='STORE' health='100' />
+    <building id='2' type='STORE' health='100' />
+    <building id='3' type='FARM' health='100' />
+    <building id='4' type='FARM' health='100' />
+    <building id='5' type='FARM' health='100' />
+    <building id='6' type='FARM' health='100' />
+    <building id='7' type='MINE' health='100' />
+    <building id='8' type='MINE' health='100' />
+    <building id='9' type='MINE' health='100' />
+    <building id='10' type='BEDROOM' health='100' />
+  </buildings>
+  <tasks />
+</colony>
