@@ -3,6 +3,7 @@ package game
 import colony.core.Colony
 import colony.core.Member
 import colony.core.Settings
+import colony.core.Task
 
 
 class Game {
@@ -58,9 +59,12 @@ class Game {
 					return
 				}
 			}
+			
 			int buildingNum = col.r.nextInt col.buildings.size()
 			m.moveTo col.buildings[buildingNum]
 			col.log "${m} moved to ${m.isIn}"
+			
+			Task t = new Task()
 		}
 	}
 
