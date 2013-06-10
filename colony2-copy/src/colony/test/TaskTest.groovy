@@ -16,13 +16,13 @@ class TaskTest extends GroovyTestCase {
 		Game game = new Game(c)
 		game.start()
 		
-		Task farm = new Task(c, TaskType.FARM)
+		Task farm = new Task(c, TaskType.FARMING)
 		assert farm.col == c
-		assert farm.type == TaskType.FARM	
+		assert farm.type == TaskType.FARMING	
 		farm.contributors.add c.members[0]	
 		c.tasks.add farm
 		
-		Task mine = new Task(c, TaskType.MINE)
+		Task mine = new Task(c, TaskType.MINING)
 		mine.contributors.addAll c.members
 		c.tasks.add mine
 			

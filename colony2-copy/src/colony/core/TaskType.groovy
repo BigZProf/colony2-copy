@@ -2,7 +2,7 @@ package colony.core
 
 class TaskType {
 
-	public static List<TaskType> all = []
+	private static List<TaskType> allTTypes = []
 
 	String name
 	Closure script
@@ -10,7 +10,7 @@ class TaskType {
 	private TaskType(String theName, Closure theScript) {
 		name = theName
 		script = theScript
-		all.add(this)
+		allTTypes.add(this)
 	}
 
 	public static final REPAIR_STRUCTURE = new TaskType(
@@ -25,7 +25,7 @@ class TaskType {
 		return (col.structure == Settings.colInitialStructure)
 	})
 
-	public static final FARM = new TaskType(
+	public static final FARMING = new TaskType(
 	'Farm', {
 		Task t, Member m, int actionPoints ->
 		Colony col = t.col
@@ -34,7 +34,7 @@ class TaskType {
 		return false
 	})
 
-	public static final MINE = new TaskType(
+	public static final MINING = new TaskType(
 	'Mine', {
 		Task t, Member m, int actionPoints ->
 		Colony col = t.col
@@ -43,7 +43,7 @@ class TaskType {
 		return false
 	})
 
-	public static final REST = new TaskType(
+	public static final RESTING = new TaskType(
 	'Rest', {
 		Task t, Member m, int actionPoints ->
 		m.health += actionPoints
@@ -68,6 +68,22 @@ class TaskType {
 			col.log("${m} has repaired ${b}, building health is now $b.health")
 		}
 		return done
+	})
+
+	/** get information about what is in the store */
+	public static final CHECK_STORAGE = new TaskType(
+	'Check storage', {
+		Task t, Member m, int actionPoints ->
+		// TODO - TaskType check storage
+		return false
+	})
+
+	/** get information about the colony structure */
+	public static final CHECK_STRUCTURE = new TaskType(
+	'Check structure', {
+		Task t, Member m, int actionPoints ->
+		// TODO - TaskType check storage
+		return false
 	})
 
 	public String toString() {

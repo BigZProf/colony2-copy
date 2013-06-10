@@ -10,6 +10,7 @@ class Member {
 	boolean isSick = false
 	int actionPoints = 0
 	Building isIn
+	Task assignedTo
 
 	// used by deserialization
 	public Member(int theId, String theName) {
@@ -27,12 +28,13 @@ class Member {
 		name
 	}
 	
-	public void workOn(Task t, int aPoints) {
+	public void work(int aPoints) {
+		assert assignedTo != null
 		if (aPoints > actionPoints) {
 			aPoints = actionPoints
 		}
 		if (aPoints > 0) {
-			t.type.script.call(t, this, aPoints)
+			assignedTo.type.script.call(assignedTo, this, aPoints)
 		}
 	}
 	

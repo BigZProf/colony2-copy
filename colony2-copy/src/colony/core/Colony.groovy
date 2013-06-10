@@ -16,7 +16,7 @@ class Colony {
 	List<Building> buildings = []
 	List<Task> tasks = []
 
-	Random r = new Random(Settings.colRandomSeed)
+	Random random = new Random(Settings.colRandomSeed)
 
 	public Colony( String theName, boolean reset = true ) {
 		name = theName
@@ -45,7 +45,7 @@ class Colony {
 
 	public List randomEvents() {
 		EventType.all.grep { EventType et ->
-			r.nextInt(100) < et.probaPct
+			random.nextInt(100) < et.probaPct
 		}
 	}
 
@@ -56,7 +56,7 @@ class Colony {
 				case EventType.CONTAGIOUS_DISEASE:
 				// selects randomly a colony member that gets sick
 					if ( members != []) {
-						Member m = members[r.nextInt(members.size())]
+						Member m = members[random.nextInt(members.size())]
 						m.isSick = true
 						log "$m is sick"
 					}
@@ -64,15 +64,15 @@ class Colony {
 				case EventType.THUNDER_STRIKE:
 				// selects randomly a building that gets damaged
 					if (buildings != []) {
-						Building b = buildings[r.nextInt(buildings.size())]
+						Building b = buildings[random.nextInt(buildings.size())]
 						log "$b before thunder strike, health = $b.health"
-						b.health -= (r.nextInt(Settings.evtThunderMaxDamage)+1)
+						b.health -= (random.nextInt(Settings.evtThunderMaxDamage)+1)
 						log "$b after thunder strike, health = $b.health"
 					}
 					break
 				case EventType.CROP_PEST:
 				// the current food available is reduced
-					food -= (food * r.nextInt(Settings.evtCropPestMaxDamagePct) / 100)
+					food -= (food * random.nextInt(Settings.evtCropPestMaxDamagePct) / 100)
 					log "Food after crop pest: $food"
 					break
 			}
@@ -130,7 +130,7 @@ class Colony {
 		}
 		buildings = []
 		colParser.buildings.building.each { building ->
-			int id = building.attribute("id").toInteger()
+			String id = building.attribute("id")
 			String type = building.attribute("type")			
 			Building b = new Building(id, type)
 			b.health = building.attribute("health").toInteger()
@@ -138,7 +138,7 @@ class Colony {
 		}
 		tasks = []
 		colParser.tasks.task.each { task ->
-			Task t = new Task(this,task.attribute("type"))
+			Task t = new Task(this,TaskType.allBTypes[task.attribute("type")])
 			if (task.attribute("building_id") != "null") {
 				int buildingId = task.attribute("building_id").toInteger()
 			}

@@ -4,27 +4,20 @@ public class Building {
 	
 	static int nextId = 1
 	
-	static List types = [
-		'FARM', 'MINE', 'BEDROOM', 'STORE'
-	]
-
 	int id
-	final type;
+	final BuildingType type;
 	int health = Settings.bldInitialHealth
 	
 	/** for de-serialization */
-	public Building(int theId, String theType) {
-		if (! types.contains(theType)) {
-			throw new Exception("Illegal building type: $theType")
-		}
-		type = theType
+	public Building(String theId, String btypeName) {
+		type = BuildingType.get(btypeName)
 		id = theId.toInteger()
 	}
 	
-	public Building(String theType) {
+	public Building(BuildingType theType) {
 		this(nextId++, theType)
 	}
 	
-	public String toString() { type + id }
+	public String toString() { type.toString() + id }
 
 }

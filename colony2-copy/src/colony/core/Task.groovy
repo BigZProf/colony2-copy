@@ -14,10 +14,10 @@ class Task {
 	public Task(Colony theColony, TaskType theType) {
 		col = theColony
 		type = theType
-	}
+	} 
 	
 	public Task(Colony theColony, String typeName) { // for deserialization
-		this(theColony, TaskType.findByName(typeName))
+		this(theColony, )
 	}
 	
 	public String toString() { type.toString() }
@@ -30,6 +30,10 @@ class Task {
 	
 	public boolean isAssignedTo(Member m) {
 		return contributors?.contains(m)
+	}
+	
+	public boolean isDoneIn(Building theBuilding) {
+		return theBuilding && this.b && b.is(theBuilding)
 	}
 	
 }

@@ -1,7 +1,9 @@
 package test.util
 
+import static colony.core.BuildingType.*
 import static groovy.io.FileType.*
 import colony.core.Building
+import colony.core.BuildingType
 import colony.core.Colony
 import colony.core.Member
 import colony.core.Settings
@@ -15,11 +17,11 @@ class TestUtils {
 			'Simbad', 'Calan', 'Pfiouu', 'Aurag', 'Stania'
 			]
 		
-		def buildingNames =
-			[ 'STORE' ] * 2 +
-			[ 'FARM' ] * 4 +
-			[ 'MINE' ] * 3 +
-			[ 'BEDROOM' ]
+		List<BuildingType> buildingTypes =
+			[ STORE ] * 2 +
+			[ FARM ] * 4 +
+			[ MINE ] * 3 +
+			[ BEDROOM ]
 		
 		Colony col1 = new Colony(colonyName)
 		
@@ -31,9 +33,9 @@ class TestUtils {
 			col1.members.add m
 		}
 		
-		buildingNames.each{ name ->
-			Building b = new Building(name)
-			assert b.type == name
+		buildingTypes.each{ BuildingType btype ->
+			Building b = new Building(btype)
+			assert b.type == btype
 			assert b.health == Settings.bldInitialHealth
 			col1.buildings.add b
 		}
