@@ -11,16 +11,16 @@
     <member id='9' name='Stania' health='100' building_id='' />
   </members>
   <buildings>
-    <building id='1' type='STORE' health='100' />
-    <building id='2' type='STORE' health='100' />
-    <building id='3' type='FARM' health='100' />
-    <building id='4' type='FARM' health='100' />
-    <building id='5' type='FARM' health='100' />
-    <building id='6' type='FARM' health='100' />
-    <building id='7' type='MINE' health='100' />
-    <building id='8' type='MINE' health='100' />
-    <building id='9' type='MINE' health='100' />
-    <building id='10' type='BEDROOM' health='100' />
+    <building id='1' type='Store' health='100' />
+    <building id='2' type='Store' health='100' />
+    <building id='3' type='Farm' health='100' />
+    <building id='4' type='Farm' health='100' />
+    <building id='5' type='Farm' health='100' />
+    <building id='6' type='Farm' health='100' />
+    <building id='7' type='Mine' health='100' />
+    <building id='8' type='Mine' health='100' />
+    <building id='9' type='Mine' health='100' />
+    <building id='10' type='Bedroom' health='100' />
   </buildings>
   <tasks>
     <task type='Farm' building_id=''>

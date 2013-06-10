@@ -1,33 +1,65 @@
-2013/06/09 09:03:59.195: ====== Creation of colony 'testGamePlay' =======
-2013/06/09 09:03:59.200: Create game with testGamePlay
-2013/06/09 09:03:59.202: Start game at day 0
-2013/06/09 09:03:59.204: New day 1 --------------
-2013/06/09 09:03:59.702: Gultar Ze Terrible moved to FARM4
-2013/06/09 09:03:59.703: Cinderella moved to FARM5
-2013/06/09 09:03:59.705: Yogolo moved to FARM5
-2013/06/09 09:03:59.706: Pikimousse moved to FARM5
-2013/06/09 09:03:59.707: Simbad moved to MINE7
-2013/06/09 09:03:59.709: Calan moved to MINE9
-2013/06/09 09:03:59.710: Pfiouu moved to MINE9
-2013/06/09 09:03:59.711: Aurag moved to BEDROOM10
-2013/06/09 09:03:59.712: Stania moved to FARM4
-2013/06/09 09:03:59.719: New day 2 --------------
-2013/06/09 09:03:59.722: Gultar Ze Terrible moved to FARM5
-2013/06/09 09:03:59.723: Cinderella moved to FARM3
-2013/06/09 09:03:59.724: Yogolo moved to FARM3
-2013/06/09 09:03:59.725: Pikimousse moved to MINE7
-2013/06/09 09:03:59.726: Simbad moved to BEDROOM10
-2013/06/09 09:03:59.728: Calan moved to MINE7
-2013/06/09 09:03:59.729: Pfiouu moved to FARM3
-2013/06/09 09:03:59.730: Aurag moved to STORE1
-2013/06/09 09:03:59.732: Stania moved to BEDROOM10
-2013/06/09 09:03:59.736: New day 3 --------------
-2013/06/09 09:03:59.738: Gultar Ze Terrible moved to FARM4
-2013/06/09 09:03:59.739: Cinderella moved to MINE8
-2013/06/09 09:03:59.740: Yogolo moved to FARM3
-2013/06/09 09:03:59.741: Pikimousse moved to FARM6
-2013/06/09 09:03:59.742: Simbad moved to FARM5
-2013/06/09 09:03:59.743: Calan moved to STORE1
-2013/06/09 09:03:59.744: Pfiouu moved to MINE7
-2013/06/09 09:03:59.745: Aurag moved to FARM4
-2013/06/09 09:03:59.747: Stania moved to FARM6
+2013/06/10 13:57:28.709: ====== Creation of colony 'testGamePlay' =======
+2013/06/10 13:57:28.724: Create game with testGamePlay
+2013/06/10 13:57:28.729: Start game at day 0
+2013/06/10 13:57:28.732: New day 1 --------------
+2013/06/10 13:57:28.763: Gultar Ze Terrible moved to Farm4
+2013/06/10 13:57:28.779: Gultar Ze Terrible assigned Farm task
+2013/06/10 13:57:28.783: Cinderella moved to Farm5
+2013/06/10 13:57:28.787: Cinderella assigned Farm task
+2013/06/10 13:57:28.789: Yogolo moved to Mine7
+2013/06/10 13:57:28.792: Yogolo assigned Check structure task
+2013/06/10 13:57:28.794: Pikimousse moved to Mine9
+2013/06/10 13:57:28.797: Pikimousse assigned Mine task
+2013/06/10 13:57:28.799: Simbad moved to Farm4
+2013/06/10 13:57:28.801: Simbad assigned Check structure task
+2013/06/10 13:57:28.803: Calan moved to Farm4
+2013/06/10 13:57:28.807: Calan assigned Check structure task
+2013/06/10 13:57:28.809: Pfiouu moved to Farm5
+2013/06/10 13:57:28.812: Pfiouu assigned Check structure task
+2013/06/10 13:57:28.816: Aurag moved to Farm3
+2013/06/10 13:57:28.818: Aurag assigned Check structure task
+2013/06/10 13:57:28.820: Stania moved to Bedroom10
+2013/06/10 13:57:28.822: Stania assigned Rest task
+2013/06/10 13:57:28.841: New day 2 --------------
+2013/06/10 13:57:28.849: Gultar Ze Terrible has farmed, available food is now 1001
+2013/06/10 13:57:28.852: Gultar Ze Terrible moved to Farm5
+2013/06/10 13:57:28.854: Gultar Ze Terrible assigned Farm task
+2013/06/10 13:57:28.856: Cinderella has farmed, available food is now 1002
+2013/06/10 13:57:28.861: Cinderella moved to Mine9
+2013/06/10 13:57:28.863: Cinderella assigned Check structure task
+2013/06/10 13:57:28.865: Yogolo moved to Mine8
+2013/06/10 13:57:28.868: Yogolo assigned Check structure task
+2013/06/10 13:57:28.870: Pikimousse has mined, available materials are now 1002
+2013/06/10 13:57:28.872: Pikimousse moved to Farm6
+2013/06/10 13:57:28.875: Pikimousse assigned Check structure task
+2013/06/10 13:57:28.877: Simbad moved to Store1
+2013/06/10 13:57:28.879: Simbad assigned Check storage task
+2013/06/10 13:57:28.881: Calan moved to Farm4
+2013/06/10 13:57:28.886: Calan assigned Check structure task
+2013/06/10 13:57:28.889: Pfiouu moved to Bedroom10
+2013/06/10 13:57:28.898: Pfiouu assigned Check structure task
+2013/06/10 13:57:28.901: Aurag moved to Farm6
+2013/06/10 13:57:28.904: Aurag assigned Check structure task
+2013/06/10 13:57:28.907: Stania moved to Farm6
+2013/06/10 13:57:28.910: Stania assigned Farm task
+2013/06/10 13:57:28.926: New day 3 --------------
+2013/06/10 13:57:28.929: Gultar Ze Terrible has farmed, available food is now 1003
+2013/06/10 13:57:28.931: Gultar Ze Terrible moved to Farm3
+2013/06/10 13:57:28.934: Gultar Ze Terrible assigned Check structure task
+2013/06/10 13:57:28.936: Cinderella moved to Mine9
+2013/06/10 13:57:28.938: Cinderella assigned Check structure task
+2013/06/10 13:57:28.941: Yogolo moved to Mine8
+2013/06/10 13:57:28.943: Yogolo assigned Mine task
+2013/06/10 13:57:28.945: Pikimousse moved to Farm4
+2013/06/10 13:57:28.948: Pikimousse assigned Farm task
+2013/06/10 13:57:28.950: Simbad moved to Farm6
+2013/06/10 13:57:28.953: Simbad assigned Check structure task
+2013/06/10 13:57:28.955: Calan moved to Farm6
+2013/06/10 13:57:28.958: Calan assigned Check structure task
+2013/06/10 13:57:28.960: Pfiouu moved to Bedroom10
+2013/06/10 13:57:28.964: Pfiouu assigned Rest task
+2013/06/10 13:57:28.966: Aurag moved to Farm5
+2013/06/10 13:57:28.969: Aurag assigned Check structure task
+2013/06/10 13:57:28.971: Stania has farmed, available food is now 1004
+2013/06/10 13:57:28.973: Stania moved to Store2
+2013/06/10 13:57:28.976: Stania assigned Check storage task
