@@ -1,16 +1,18 @@
 package colony.core
 
+import static colony.core.BuildingType.*
 import groovy.xml.MarkupBuilder
 
 class Colony {
 
-	String name
-	String fileName
+	private String name
+	private String fileName
+	private int day = 0
+	
+	int nextId = 1
 
-	int food = Settings.colInitialFood
-	int structure = Settings.colInitialStructure
-	int energy = Settings.colInitialEnergy
-	int materials= Settings.colInitialMaterials
+	int food = Settings.colInitialFood					// currently available
+	int materials= Settings.colInitialMaterials			// currently available
 
 	List<Member> members = []
 	List<Building> buildings = []
@@ -65,15 +67,18 @@ class Colony {
 				// selects randomly a building that gets damaged
 					if (buildings != []) {
 						Building b = buildings[random.nextInt(buildings.size())]
-						log "$b before thunder strike, health = $b.health"
-						b.health -= (random.nextInt(Settings.evtThunderMaxDamage)+1)
-						log "$b after thunder strike, health = $b.health"
+						log "$b before thunder strike, health = $b.integrity"
+						b.integrity -= (random.nextInt(Settings.evtThunderMaxDamage)+1)
+						log "$b after thunder strike, health = $b.integrity"
 					}
 					break
 				case EventType.CROP_PEST:
 				// the current food available is reduced
-					food -= (food * random.nextInt(Settings.evtCropPestMaxDamagePct) / 100)
-					log "Food after crop pest: $food"
+					def food_stores = buildings.grep {it.type == STORE && it.food > 0}
+					int store_num = random.nextInt(food_stores.size())
+					Building store = food_stores[store_num]
+					store.food *= Settings.evtCropPestDamagePct
+					log "Crop pest attacks $store: $food food remaining"
 					break
 			}
 		}
@@ -82,7 +87,7 @@ class Colony {
 	public String toXML() {
 		def writer = new StringWriter()
 		def builder = new MarkupBuilder(writer)
-		builder.colony(name: name, food: food, structure: structure, energy: energy, materials: materials) {
+		builder.colony(name: name, day: day, next_id: nextId) {
 			members() {
 				for(Member m in members) {
 					member(id: m.id, name: m.name, health: m.health, building_id: m.isIn?.id)
@@ -90,12 +95,12 @@ class Colony {
 			}
 			buildings() {
 				for(Building b in buildings) {
-					building(id: b.id, type: b.type, health: b.health)
+					building(id: b.id, type: b.type, integrity: b.integrity)
 				}
 			}
 			tasks() {
 				for(Task t in tasks) {
-					task(type: t.type, building_id: t.b?.id) {
+					task(type: t.type, building_id: t.building?.id) {
 						contributors() {
 							for(Member m in t.contributors) {
 								member_id(m.id)
@@ -111,15 +116,13 @@ class Colony {
 	public void fromXML(String xml) {
 		def colParser = new XmlParser().parseText(xml)
 		name = colParser.attribute("name")
-		food = colParser.attribute("food").toInteger()
-		structure = colParser.attribute("structure").toInteger()
-		energy = colParser.attribute("energy").toInteger()
-		materials = colParser.attribute("materials").toInteger()
+		day = colParser.attribute("day").toInteger()
+		nextId = colParser.attribute("next_id").toInteger()
 		members = []
 		colParser.members.member.each { member ->
-			int id = member.attribute("id").toInteger()
+			String id = member.attribute("id")
 			String name = member.attribute("name")
-			Member m = new Member(id, name)
+			Member m = new Member(id, name, this)
 			m.health = member.attribute("health").toInteger()
 			String building_id = member.attribute("building_id")
 			if (building_id != '') {
@@ -132,8 +135,8 @@ class Colony {
 		colParser.buildings.building.each { building ->
 			String id = building.attribute("id")
 			String type = building.attribute("type")			
-			Building b = new Building(id, type)
-			b.health = building.attribute("health").toInteger()
+			Building b = new Building(id, type, this)
+			b.integrity = building.attribute("integrity").toInteger()
 			buildings.add b
 		}
 		tasks = []
@@ -149,7 +152,7 @@ class Colony {
 	}
 
 	void loadDefinition() {
-		File file = new File("${Settings.colDefDir}/${fileName}.xml")
+		File file = definitionFile()
 		if (file.exists()) {
 			log "Loading definition from ${Settings.colDefDir}/${fileName}.xml"
 			fromXML file.text
@@ -157,28 +160,40 @@ class Colony {
 	}
 	
 	private void deleteDefinition() {
-		File file = new File("${Settings.colDefDir}/${fileName}.xml")
+		File file = definitionFile()
 		if (file.exists()) {
 			log "Erasing definition from ${Settings.colDefDir}/${fileName}.xml"
 			file.delete()
 		}
 	}
 	
+	File definitionFile() {
+		new File("${Settings.colDefDir}/${fileName}.xml")
+	}
+	
+	File logFile() {
+		new File("${Settings.colLogDir}/${fileName}.log")
+	}
+	
+	File stateFile(state_day) {
+		new File("${Settings.colStateDir}/${fileName}_${String.format('%03d',state_day)}.xml")
+	}
 	void saveDefinition() {
-		new File("${Settings.colDefDir}/${fileName}.xml").write toXML()
+		definitionFile().write toXML()
 	}
 
-	void loadState(int day) {
+	void loadState(int state_day) {
+		day = state_day
 		fromXML new File("${Settings.colStateDir}/${fileName}_${String.format('%03d',day)}.xml").text
 	}
 
-	void saveState(int day) {
-		new File("${Settings.colStateDir}/${fileName}_${String.format('%03d',day)}.xml").write toXML()
+	void saveState() {
+		stateFile(day).write toXML()
 	}
 
 	void log(message) {
 		String timestamp = new Date().format('YYYY/MM/dd HH:mm:ss.S')
-		new File("${Settings.colLogDir}/${fileName}.log") << "${timestamp}: ${message}\n"
+		logFile() << "${timestamp}: ${message}\n"
 	}
 
 }

@@ -1,4 +1,4 @@
-<colony name='Test Colony New 1!' food='1000' structure='100' energy='1000' materials='500'>
+<colony name='Test Colony New 1!' day='0' next_id='20'>
   <members>
     <member id='1' name='Gultar Ze Terrible' health='100' building_id='' />
     <member id='2' name='Cinderella' health='100' building_id='' />
@@ -11,16 +11,16 @@
     <member id='9' name='Stania' health='100' building_id='' />
   </members>
   <buildings>
-    <building id='1' type='Store' health='100' />
-    <building id='2' type='Store' health='100' />
-    <building id='3' type='Farm' health='100' />
-    <building id='4' type='Farm' health='100' />
-    <building id='5' type='Farm' health='100' />
-    <building id='6' type='Farm' health='100' />
-    <building id='7' type='Mine' health='100' />
-    <building id='8' type='Mine' health='100' />
-    <building id='9' type='Mine' health='100' />
-    <building id='10' type='Bedroom' health='100' />
+    <building id='10' type='Store' integrity='100' />
+    <building id='11' type='Store' integrity='100' />
+    <building id='12' type='Farm' integrity='100' />
+    <building id='13' type='Farm' integrity='100' />
+    <building id='14' type='Farm' integrity='100' />
+    <building id='15' type='Farm' integrity='100' />
+    <building id='16' type='Mine' integrity='100' />
+    <building id='17' type='Mine' integrity='100' />
+    <building id='18' type='Mine' integrity='100' />
+    <building id='19' type='Bedroom' integrity='100' />
   </buildings>
   <tasks />
 </colony>

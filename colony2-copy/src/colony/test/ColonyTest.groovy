@@ -14,10 +14,6 @@ class ColonyTest extends GroovyTestCase {
 		Colony col1 = TestUtils.sampleColony('Test Colony New 1!')
 		assert col1.name == 'Test Colony New 1!'
 		assert col1.fileName == 'TestColonyNew1' 		
-		assert col1.food == Settings.colInitialFood
-		assert col1.energy == Settings.colInitialEnergy
-		assert col1.materials == Settings.colInitialMaterials
-		assert col1.structure == Settings.colInitialStructure
 		assert col1.buildings.size() == 10	
 		col1.saveDefinition()
 		

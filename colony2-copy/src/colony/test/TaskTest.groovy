@@ -10,7 +10,7 @@ class TaskTest extends GroovyTestCase {
 
 	public void testTaskFarm() {
 		
-		TestUtils.resetAll 'testTaskFarm'
+		TestUtils.deleteAll 'testTaskFarm'
 		Colony c = TestUtils.sampleColony 'testTaskFarm'
 		
 		Game game = new Game(c)
@@ -27,7 +27,7 @@ class TaskTest extends GroovyTestCase {
 		c.tasks.add mine
 			
 		Task rp = new Task(c, TaskType.REPAIR_BUILDING)
-		rp.b = c.buildings[0]
+		rp.building = c.buildings[0]
 		rp.contributors.add c.members[1]	
 		c.tasks.add rp
 		

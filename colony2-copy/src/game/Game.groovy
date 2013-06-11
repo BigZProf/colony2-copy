@@ -10,7 +10,6 @@ class Game {
 
 	boolean over = false
 	final Colony col
-	int day
 
 	public Game(Colony theColony) {
 		col = theColony
@@ -18,8 +17,9 @@ class Game {
 	}
 
 	public void start(int day=0) {
-		col.log "Start game at day $day"
-		File f = new File("${Settings.colStateDir}/${col.fileName}_${day}.xml")
+		col.day = day
+		col.log "Start game at day $col.day"
+		File f = new File("${Settings.colStateDir}/${col.fileName}_${col.day}.xml")
 		if (f.exists()) {
 			col.log "Restoring colony state"
 			col.fromXML f.text
@@ -27,10 +27,10 @@ class Game {
 	}
 
 	public void loop(int days = Settings.gameMaxDays) {
-		int untilDay = day + days
-		while (!over && day < untilDay) {
-			day++
-			col.log "New day $day --------------"
+		int untilDay = col.day + days
+		while (!over && col.day < untilDay) {
+			col.day++
+			col.log "New day $col.day --------------"
 			startDay()
 			playDay()
 			endDay()
@@ -44,20 +44,19 @@ class Game {
 
 	void playDay() {
 		/**
-		 * for each member,
-		 * while the member has action points
+		 * while a member has action points
 		 * - complete unfinished task if any
 		 * - move randomly inside the colony (go to a building)
 		 * - if some task is already started in the building, work on it
 		 * 		else create a task suitable with for the building type
-		 * - inspect the structure or the building (gain information)
 		 * - if another member is here, exchange information
 		 */
 		col.members.each { Member m ->
 			
 			// complete unfinished task
-			if (m.actionPoints > 0 && m.assignedTo) {
+			if (m.actionPoints > 0 && m.assignedTo != null) {
 				m.work 1 // TODO compute action points to spend for task
+				col.log "$m has spent 1 action point on ${m.assignedTo}"
 			}
 			
 			// move randomly to a building
@@ -66,9 +65,9 @@ class Game {
 			m.moveTo building
 			col.log "${m} moved to ${building}"
 
-			// help here is a task is already started
+			// help here if a task is already started
 			Task t
-			def possibleTasks = col.tasks.grep({ it.isDoneIn(building) && !it.done})
+			def possibleTasks = col.tasks.grep { it.isDoneIn(building) && !it.done}
 			if (possibleTasks != []) {
 				def taskNum = col.random.nextInt(possibleTasks.size())
 				t = possibleTasks[taskNum]
@@ -78,10 +77,11 @@ class Game {
 				def possibleTTypes = col.buildings[buildingNum].type.taskTypes
 				def ttypeNum = col.random.nextInt possibleTTypes.size()
 				t = new Task(col, possibleTTypes[ttypeNum])
+				t.building = m.isIn
 				col.tasks.add t
 			}
 			m.assignedTo = t
-			col.log "${m} assigned ${t} task"
+			col.log "${m} is assigned to ${t}"
 		}
 
 		// TODO - complete playDay
@@ -90,10 +90,10 @@ class Game {
 
 	void endDay() {
 		// TODO - col.consume()
-		// TODO - col.storeSurpluses()
+		// TODO - col.storeSurpluses() - collect food and materials produced
 		// TODO - col.updateStats()
-		col.saveState(day)
-		if (day > Settings.gameMaxDays) {
+		col.saveState()
+		if (col.day > Settings.gameMaxDays) {
 			over = true
 		}
 	}

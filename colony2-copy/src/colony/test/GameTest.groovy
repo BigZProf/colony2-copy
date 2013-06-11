@@ -8,7 +8,7 @@ class GameTest extends GroovyTestCase {
 
 	public void testGameInit() {
 		
-		TestUtils.resetAll 'testGameInit'
+		TestUtils.deleteAll 'testGameInit'
 		
 		Colony c = TestUtils.sampleColony('testGameInit')		
 		Game game = new Game(c)
@@ -20,19 +20,18 @@ class GameTest extends GroovyTestCase {
 	}
 	
 	public void testGameStartDay0() {
-		TestUtils.resetAll 'testGameStartDay0'
+		TestUtils.deleteAll 'testGameStartDay0'
 		
 		Colony c = TestUtils.sampleColony('testGameStartDay0')
 		Game game = new Game(c)
 		
 		game.start()
-		assert game.day == 0
 
 		c.saveDefinition()
 	}
 	
 	public void testGamePlay() {
-		TestUtils.resetAll 'testGamePlay'
+		TestUtils.deleteAll 'testGamePlay'
 		
 		Colony c = TestUtils.sampleColony('testGamePlay')
 		Game game = new Game(c)
@@ -40,10 +39,10 @@ class GameTest extends GroovyTestCase {
 		game.start()
 		
 		game.loop(1)
-		assert game.day == 1
+		assert c.day == 1
 
 		game.loop(2)
-		assert game.day == 3
+		assert c.day == 3
 		
 		c.saveDefinition()
 	}

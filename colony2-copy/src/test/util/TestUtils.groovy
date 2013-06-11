@@ -26,17 +26,19 @@ class TestUtils {
 		Colony col1 = new Colony(colonyName)
 		
 		memberNames.each{ name ->
-			Member m = new Member(name)
+			Member m = new Member(name, col1)
 			assert m.name == name
+			assert m.colony == col1
 			assert m.health == Settings.memInitialHealth
 			assert m.isSick == false
 			col1.members.add m
 		}
 		
 		buildingTypes.each{ BuildingType btype ->
-			Building b = new Building(btype)
+			Building b = new Building(btype, col1)
 			assert b.type == btype
-			assert b.health == Settings.bldInitialHealth
+			assert b.colony == col1
+			assert b.integrity == Settings.bldInitialIntegrity
 			col1.buildings.add b
 		}
 		
@@ -73,16 +75,6 @@ class TestUtils {
 		deleteDefinition colonyName
 		deleteLog colonyName
 		deleteState colonyName
-	}
-	
-	static void resetAll(String colonyName) {
-		deleteAll(colonyName)
-		resetIds()
-	}
-	
-	static void resetIds() {
-		Building.nextId = 1
-		Member.nextId = 1
 	}
 
 }

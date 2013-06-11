@@ -2,26 +2,27 @@ package colony.core
 
 class Member {
 	
-	static nextId = 1
-
-	int id
-	String name
+	final int id
+	final String name
+	final Colony colony
 	int health = Settings.memInitialHealth
 	boolean isSick = false
 	int actionPoints = 0
 	Building isIn
 	Task assignedTo
+	List<Information> infos = []
 
 	// used by deserialization
-	public Member(int theId, String theName) {
+	public Member(String theId, String theName, Colony theColony) {
 		name = theName
-		id = theId
-		nextId = theId+1
+		id = theId.toInteger()
+		colony = theColony
 	}	
 	
-	public Member(theName) {
+	public Member(String theName, Colony theColony) {
 		name = theName
-		id = nextId++
+		colony = theColony
+		id = colony.nextId++
 	}
 
 	public String toString() {
@@ -36,6 +37,7 @@ class Member {
 		if (aPoints > 0) {
 			assignedTo.type.script.call(assignedTo, this, aPoints)
 		}
+		actionPoints -= aPoints
 	}
 	
 	public void moveTo(building) {

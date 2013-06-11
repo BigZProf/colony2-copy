@@ -6,7 +6,7 @@ class Task {
 	
 	Colony col
 	TaskType type
-	Building b
+	Building building
 	
 	List<Member> contributors = []
 	boolean done = false
@@ -33,7 +33,7 @@ class Task {
 	}
 	
 	public boolean isDoneIn(Building theBuilding) {
-		return theBuilding && this.b && b.is(theBuilding)
+		return theBuilding && this.building && building.is(theBuilding)
 	}
 	
 }

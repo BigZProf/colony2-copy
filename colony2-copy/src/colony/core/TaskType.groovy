@@ -13,33 +13,23 @@ class TaskType {
 		allTTypes.add(this)
 	}
 
-	public static final REPAIR_STRUCTURE = new TaskType(
-	'Repair structure', {
-		Task t, Member m, int actionPoints ->
-		Colony col = t.col
-		col.structure += actionPoints
-		if (col.structure > Settings.colInitialStructure) {
-			col.structure = Settings.colInitialStructure
-		}
-		col.log("${m} repaired the structure, now $col.structure")
-		return (col.structure == Settings.colInitialStructure)
-	})
-
 	public static final FARMING = new TaskType(
-	'Farm', {
+	'Farming task', {
 		Task t, Member m, int actionPoints ->
 		Colony col = t.col
-		col.food += actionPoints
-		col.log("${m} has farmed, available food is now $col.food")
+		Building farm = t.building
+		farm.addFood(actionPoints * Settings.farmProdRate)
+		col.log "${m} has farmed, available food is now ${farm.food}"
 		return false
 	})
 
 	public static final MINING = new TaskType(
-	'Mine', {
+	'Mining task', {
 		Task t, Member m, int actionPoints ->
 		Colony col = t.col
-		col.log("${m} has mined, available materials are now $col.food")
-		col.materials += actionPoints
+		Building mine = t.building
+		mine.addMaterials(actionPoints * Settings.mineProdRate)
+		col.log "${m} has mined, available materials are now ${mine.materials}"
 		return false
 	})
 
@@ -54,27 +44,27 @@ class TaskType {
 	})
 	
 	public static final REPAIR_BUILDING = new TaskType(
-	'Repair building', {
+	'Repairing a building', {
 		Task t, Member m, int actionPoints ->		
 		boolean done = false
-		Building b = t.b
+		Building b = t.building
 		Colony col = t.col
 		if (b) {
-			b.health += actionPoints
-			if (b.health > Settings.bldInitialHealth) {
-				b.health = Settings.bldInitialHealth
+			b.integrity += actionPoints
+			if (b.integrity > Settings.bldInitialIntegrity) {
+				b.integrity = Settings.bldInitialIntegrity
 			}
-			done = (b.health == Settings.bldInitialHealth)
-			col.log("${m} has repaired ${b}, building health is now $b.health")
+			done = (b.integrity == Settings.bldInitialIntegrity)
+			col.log("${m} has repaired ${b}, building health is now ${b.integrity}%")
 		}
 		return done
 	})
 
 	/** get information about what is in the store */
-	public static final CHECK_STORAGE = new TaskType(
-	'Check storage', {
+	public static final CHECK_STORE = new TaskType(
+	'Checking storage', {
 		Task t, Member m, int actionPoints ->
-		// TODO - TaskType check storage
+		m.infos.addAll(t.building.inspect())
 		return false
 	})
 
